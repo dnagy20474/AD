@@ -13,38 +13,54 @@ public class Exercici3 {
         double preuBillet = 0.0;
         double dinersEstalviats = 0.0;
 
-        // Demanem al usuari datos:
+        // Demanem a l'usuari el cost del bitllet:
         System.out.printf("¿Quant costa el bitllet? ");
-        preuBillet = sc.nextDouble();
 
+        // Bucle per a que es repeteixqui fins que sigui doble o enter.
+        while (!sc.hasNextDouble()) {
+            // Demanem a l'usuari el cost del billet un altra vegada:
+            sc.next(); // Fem un salt de buffer perquè no doni error.
+            System.out.printf("¿Quant costa el bitllet? ");
+        }
+        preuBillet = sc.nextDouble(); // Guardem el valor correcte a sa variable correspondent.
+
+        // Demanem a l'usuari els diners estalviats:
         System.out.printf("¿Quants diners tens estalviats? ");
-        dinersEstalviats = sc.nextDouble();
 
-        // Cridem el métode per a comprobar que no sigui menor o igual a 0.
-
-        if (!majorAZero(preuBillet, dinersEstalviats)) {
-            sc.close();
+        // Bucle perquè es repeteixi fins que sigui doble o enter.
+        while (!sc.hasNextDouble()) {
+            // Demanem a l'usuari els diners estalviats un altra vegada:
+            sc.next(); // Fem un salt de buffer perquè no doni error.
+            System.out.printf("¿Quants diners tens estalviats? ");
         }
-        // Condicions per comprar el billet.
-        if (dinersEstalviats >= preuBillet) {
-            System.out.printf("Bon viatge! Pots comprar el bitllet");
+        dinersEstalviats = sc.nextDouble(); // Guardem el valor correcte a sa variable correspondent.
+
+        if (!majorAZero(preuBillet, dinersEstalviats)) { // Condició per veure que singuin majors a zero.
         } else {
-            // Calculem la resta que ens queda per poder comprar el billet.
-            double resta = preuBillet - dinersEstalviats;
+            // Condicions per comprar el billet.
+            if (dinersEstalviats >= preuBillet) {
+                System.out.printf("Bon viatge! Pots comprar el bitllet");
+            } else {
+                // Calculem la resta que ens queda per poder comprar el billet.
+                double resta = preuBillet - dinersEstalviats;
 
-            System.out.printf("No tens prou diners. Et falten " + resta + "€ para poder viatjar.");
+                System.out.printf("No tens prou diners. Et falten " + resta + "€ para poder viatjar.");
 
-            System.out.println(); // espai de línea.
-            // Mostrem el resultat específic que ens demana l'enunciat.
-            System.out.printf("Valor %.2f €  \n", resta);
+                System.out.println(); // espai de línea.
+                // Mostrem el resultat específic que ens demana l'enunciat.
+                System.out.printf("Valor %.2f €  \n", resta);
+            }
         }
+
+        sc.close();
     }
 
     // Creem métode per comprobar que sigui major a 0.
     private static boolean majorAZero(double preuBillet, double dinersEstalviats) {
-        if (dinersEstalviats <= 0) {
-            System.out.println("Tens que intruduir un valor positiu, major a 0!");
+        if (preuBillet <= 0 || dinersEstalviats <= 0) {
+            System.out.printf("Tens que intruduir un valor positiu, major a 0!");
+            return false;
         }
-        return false;
+        return true;
     }
 }
