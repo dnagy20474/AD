@@ -8,25 +8,25 @@ public class Exercici6 {
     static Scanner teclat = new Scanner(System.in);
 
     // Creem un ArrayList per els números decimals.
-    static ArrayList<Double> numDecimals = new ArrayList();
+    static ArrayList<Double> numDecimals = new ArrayList<>();
 
-    static void main() {
+    // Guardam el total de les despeses.
+    static double totalDespeses = 0;
 
-        // Cridem el mètode de mostrarMenu().
+    public static void main(String[] args) {
+
+        // Cridem el mètode mostrarMenu().
         mostrarMenu();
 
     }
 
-    // Creem el mètode mostrarMenu()
+    // Creem el mètode mostrarMenu().
     public static void mostrarMenu() {
-        // Mostrem el menú amb les opcions.
-        System.out.println(" --- GESTOR DE DESPESES ---");
 
-        System.out.println("1. Despeses. (L’usuari pot introduir  un número indeterminat de despeses. " + "\n" +
-                "Cal calcular el total de les despeses)");
-        System.out.println("2. Pressupost.( Demana un valor que anomenarem pressupost. " +  "\n" +
-                "Comprovar si estem en perill (Alerta). " +  "\n" +
-                "Mostra el missatge pertinent.)");
+        // Mostrem el menú amb les opcions.
+        System.out.println("--- GESTOR DE DESPESES ---");
+        System.out.println("1. Despeses. (L’usuari pot introduir un número indeterminat de despeses. Cal calcular el total de les despeses)");
+        System.out.println("2. Pressupost.( Demana un valor que anomenarem pressupost. Comprovar si estem en perill (Alerta). Mostra el missatge pertinent.)");
         System.out.println("0. Sortir");
 
         // Demanem a l'usuari quina opció tria.
@@ -35,38 +35,87 @@ public class Exercici6 {
 
         // Condicions segons l'opció escollida.
         if (opcio == 1) {
-            calcularTotal(); // Cridem el mètode calcularTotal() segons l'opció 1.
+
+            // Cridem el mètode calcularTotal().
+            totalDespeses = calcularTotal();
+
+        } else if (opcio == 2) {
+
+            // Demanam el pressupost.
+            System.out.printf("Introdueix el pressupost: ");
+            double pressupost = teclat.nextDouble();
+
+            // Comprovam si hem superat el pressupost.
+            comprovarAlerta(totalDespeses, pressupost);
+
+        } else if (opcio == 0) {
+
+            System.out.println("Sortint del programa...");
+
+        } else {
+
+            System.out.println("Opció no vàlida.");
+
         }
     }
 
     // Creem el mètode calcularTotal per l'opció 1.
     public static double calcularTotal() {
-        // Declarem una variable pel num de vegades.
-        int numVegades = 0;
 
-        // Demanem a l'usuari quantes vegades vol introduir el número.
-        System.out.printf("¿Quantes vegades vols introduir els números? " +
-                "(Mínim 3 vegades). ");
-        numVegades = teclat.nextInt(); // Afegim l'input a la variable.
+        // Buidam l'ArrayList per evitar acumular despeses anteriors.
+        numDecimals.clear();
 
-        // Demanem a l'usuari mínim 3 números decimals.
+        // Demanam quantes despeses vol introduir.
+        int numVegades;
+
         do {
-            System.out.printf("Introdueix números decimals: ");
-            numDecimals.add(teclat.nextDouble()); // Guardem els números decimals al ArrayList
 
-            numVegades++; //
+            System.out.printf("Quantes despeses vols introduir? (Mínim 3): ");
+            numVegades = teclat.nextInt();
+
+            if (numVegades < 3) {
+                System.out.println("Has d'introduir com a mínim 3 despeses.");
+            }
 
         } while (numVegades < 3);
 
-        double suma = 0; // Declarem una variable per les sumes.
+        // Demanam les despeses i les guardam dins l'ArrayList.
+        for (int i = 0; i < numVegades; i++) {
 
-        // Recorrem l'ArrayList i anem sumant 1 en 1.
-        for (int i = 0; i < numDecimals.size(); i++) {
-            suma += numDecimals.get(i);
+            System.out.printf("Introdueix la despesa %d: ", i + 1);
+            numDecimals.add(teclat.nextDouble());
+
         }
 
-        System.out.printf("El total gastat és: %\n €", suma);
+        // Variable per guardar la suma.
+        double suma = 0;
 
-        return suma; // Retornem suma.
+        // Recorrem l'ArrayList i sumam totes les despeses.
+        for (int i = 0; i < numDecimals.size(); i++) {
+
+            suma += numDecimals.get(i);
+
+        }
+
+        // Mostram el resultat.
+        System.out.printf("El total gastat és: %.2f €%n", suma);
+
+        // Retornam la suma.
+        return suma;
+    }
+
+    // Creem el mètode comprovarAlerta.
+    public static void comprovarAlerta(double total, double pressupost) {
+
+        // Comprovam si el total supera el pressupost.
+        if (total > pressupost) {
+
+            System.out.println("ALERTA: Has superat el pressupost!");
+
+        } else {
+
+            System.out.println("Tot correcte. Estàs dins del pressupost.");
+
+        }
     }
 }
