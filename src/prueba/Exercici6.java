@@ -51,14 +51,12 @@ public class Exercici6 {
 
         // Demanem a l'usuari mínim 3 números decimals.
         do {
-            // Condició per a mínim de vegades.
-            if (numVegades < 3) {
-                System.out.println("Tens que introduir almenys 3 números decimals.");
-            }
-
             System.out.printf("Introdueix números decimals: ");
-            numDecimals.add(teclat.nextDouble()); // Guardem
-        } while (numVegades > 3);
+            numDecimals.add(teclat.nextDouble()); // Guardem els números decimals al ArrayList
+
+            numVegades++; //
+
+        } while (numVegades < 3);
 
         double suma = 0; // Declarem una variable per les sumes.
 
