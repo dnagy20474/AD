@@ -1,4 +1,4 @@
-package prueba;
+package exercicis;
 
 public class HolaMundo {
     static void main() {

@@ -1,4 +1,4 @@
-package prueba;
+package exercicis;
 
 import java.util.*;
 
