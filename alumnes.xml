@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alumnes>
+    <alumne id="1">
+        <nom>Anna</nom>
+        <edat>20</edat>
+    </alumne>
+
+    <alumne id="2">
+        <nom>Marc</nom>
+        <edat>21</edat>
+    </alumne>
+</alumnes>
